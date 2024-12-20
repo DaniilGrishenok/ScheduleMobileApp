@@ -52,6 +52,13 @@ android {
 dependencies {
     // QR Code scanning (ML Kit)
     implementation("com.google.mlkit:barcode-scanning:17.0.3")
+    implementation ("androidx.compose.ui:ui:1.5.0")  // Используйте актуальную версию Compose UI
+
+    // Material3
+    implementation ("androidx.compose.material3:material3:1.1.0")  // Версия Material3
+
+    // Compose Foundation
+    implementation ("androidx.compose.foundation:foundation:1.5.0" ) // Foundation для Compose
 
     // Networking (Retrofit and Gson)
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
