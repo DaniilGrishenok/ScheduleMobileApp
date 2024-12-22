@@ -2,6 +2,12 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
+      <entry key="ScheduleScreenTest">
+        <State />
+      </entry>
+      <entry key="ScheduleViewModelInstrumentedTest">
+        <State />
+      </entry>
       <entry key="app">
         <State>
           <targetSelectedWithDropDown>
@@ -15,8 +21,17 @@
               </deviceKey>
             </Target>
           </targetSelectedWithDropDown>
-          <timeTargetWasSelectedWithDropDown value="2024-12-18T20:23:21.618505Z" />
+          <timeTargetWasSelectedWithDropDown value="2024-12-22T09:10:51.568152100Z" />
         </State>
+      </entry>
+      <entry key="testCategorySelectionChangesCorrectly()">
+        <State />
+      </entry>
+      <entry key="testScheduleScreenDisplaysCorrectly()">
+        <State />
+      </entry>
+      <entry key="testSelectCategoryButtonDisplaysCorrectCategory()">
+        <State />
       </entry>
     </value>
   </component>

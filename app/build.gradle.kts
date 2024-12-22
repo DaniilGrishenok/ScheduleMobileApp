@@ -29,69 +29,69 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
     buildFeatures {
         compose = true
     }
+
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
     }
+    packagingOptions {
+        exclude("META-INF/LICENSE-notice.md") // Исключение конфликтующих файлов лицензий
+        exclude("META-INF/LICENSE.txt")
+        exclude("META-INF/NOTICE.txt")
+    }
     packaging {
         resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes += "/META-INF/{AL2.0,LGPL2.1,LICENSE.md,LICENSE.txt,NOTICE.md,NOTICE.txt}"
         }
     }
 }
 
 dependencies {
-    // QR Code scanning (ML Kit)
-    implementation("com.google.mlkit:barcode-scanning:17.0.3")
-    implementation ("androidx.compose.ui:ui:1.5.0")  // Используйте актуальную версию Compose UI
-
-    // Material3
-    implementation ("androidx.compose.material3:material3:1.1.0")  // Версия Material3
-
-    // Compose Foundation
-    implementation ("androidx.compose.foundation:foundation:1.5.0" ) // Foundation для Compose
-
-    // Networking (Retrofit and Gson)
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation ("com.journeyapps:zxing-android-embedded:4.3.0")
-    implementation ("com.google.zxing:core:3.5.1")
-
-
-    // Coroutines
+    // --- Основные зависимости ---
+    implementation(platform("androidx.compose:compose-bom:2023.08.00"))
+    implementation("androidx.compose.ui:ui")
+    implementation("androidx.compose.material3:material3")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
 
-    // Logging (for debugging)
-    implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.activity.compose)
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.material3)
+    // --- Навигация ---
     implementation("androidx.navigation:navigation-compose:2.7.3")
-    implementation(libs.androidx.appcompat)
-    implementation ("com.google.mlkit:barcode-scanning:17.2.0")
-    implementation(libs.androidx.camera.core)
-    implementation(libs.androidx.camera.view)
-    implementation(libs.androidx.camera.lifecycle)
 
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
-    debugImplementation(libs.androidx.ui.tooling)
-    debugImplementation(libs.androidx.ui.test.manifest)
+    // --- Работа с QR-кодами ---
+    implementation("com.google.mlkit:barcode-scanning:17.2.0")
+    implementation("com.journeyapps:zxing-android-embedded:4.3.0")
+    implementation("com.google.zxing:core:3.5.1")
+
+    // --- Сетевые запросы ---
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
+
+    // --- Архитектура ---
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.5.0")
+
+    // --- Тестирование ---
+    testImplementation("junit:junit:4.13.2")
+    testImplementation("io.mockk:mockk:1.13.2")
+    androidTestImplementation("io.mockk:mockk-android:1.13.2")
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.5.0") // Указана версия
+    androidTestImplementation("androidx.test:runner:1.5.2")
+    androidTestImplementation("androidx.test:rules:1.5.0")
+    androidTestImplementation("androidx.compose.ui:ui-test-manifest:1.5.0") // Указана версия
+
+    // --- Логирование ---
+    debugImplementation("androidx.compose.ui:ui-tooling")
+    debugImplementation("androidx.compose.ui:ui-tooling-preview")
 }

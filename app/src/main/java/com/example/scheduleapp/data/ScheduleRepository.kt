@@ -3,6 +3,20 @@ package com.example.scheduleapp.data
 class ScheduleRepository {
     private val api = RetrofitInstance.api
 
+
+
+    // Получить расписание на день
+    fun getScheduleForDay(date: String, onResult: (List<Lesson>) -> Unit, onError: (Throwable) -> Unit) {
+        api.getScheduleForDay(date).enqueue(object : retrofit2.Callback<List<Lesson>> {
+            override fun onResponse(call: retrofit2.Call<List<Lesson>>, response: retrofit2.Response<List<Lesson>>) {
+                response.body()?.let { onResult(it) }
+            }
+
+            override fun onFailure(call: retrofit2.Call<List<Lesson>>, t: Throwable) {
+                onError(t)
+            }
+        })
+    }
     fun getGroups(onResult: (List<Group>) -> Unit, onError: (Throwable) -> Unit) {
         api.getGroups().enqueue(object : retrofit2.Callback<List<Group>> {
             override fun onResponse(call: retrofit2.Call<List<Group>>, response: retrofit2.Response<List<Group>>) {
@@ -38,20 +52,6 @@ class ScheduleRepository {
             }
         })
     }
-
-    // Получить расписание на день
-    fun getScheduleForDay(date: String, onResult: (List<Lesson>) -> Unit, onError: (Throwable) -> Unit) {
-        api.getScheduleForDay(date).enqueue(object : retrofit2.Callback<List<Lesson>> {
-            override fun onResponse(call: retrofit2.Call<List<Lesson>>, response: retrofit2.Response<List<Lesson>>) {
-                response.body()?.let { onResult(it) }
-            }
-
-            override fun onFailure(call: retrofit2.Call<List<Lesson>>, t: Throwable) {
-                onError(t)
-            }
-        })
-    }
-
     // Получить расписание для группы
     fun getScheduleForGroup(groupId: Int, date: String, onResult: (List<Lesson>) -> Unit, onError: (Throwable) -> Unit) {
         api.getScheduleForGroup(groupId, date).enqueue(object : retrofit2.Callback<List<Lesson>> {
